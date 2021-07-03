@@ -1,0 +1,34 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './components/inicio/home/home.component';
+import { RegisterComponent } from './components/inicio/register/register.component';
+import { ResultadosComponent } from './components/inicio/resultados/resultados.component';
+import { EstadisticasPrincipalComponent } from './components/inicioAdministrador/estadisticas/estadisticas-principal/estadisticas-principal.component';
+import { HomeAdministradorComponent } from './components/inicioAdministrador/home-administrador/home-administrador.component';
+import { EquiposComponent } from './components/inicioAdministrador/torneos/equipos/equipos.component';
+import { GraficasComponent } from './components/inicioAdministrador/torneos/graficas/graficas.component';
+import { PartidosComponent } from './components/inicioAdministrador/torneos/partidos/partidos.component';
+import { TablaComponent } from './components/inicioAdministrador/torneos/tabla/tabla.component';
+import { TorneoInicioComponent } from './components/inicioAdministrador/torneos/torneo-inicio/torneo-inicio.component';
+import { TorneoComponent } from './components/inicioAdministrador/torneos/torneo/torneo.component';
+import { UsuariosPrincipalComponent } from './components/inicioAdministrador/usuarios/usuarios-principal/usuarios-principal.component';
+
+const routes: Routes = [
+  {path:'', component: HomeComponent},
+  {path:'register', component: RegisterComponent},
+  {path:'results', component: ResultadosComponent},
+  {path: 'homeAdmin', component: HomeAdministradorComponent},
+  {path: 'homeAdmin/torneos', component:TorneoInicioComponent},
+  {path: 'homeAdmin/users', component:UsuariosPrincipalComponent},
+  {path: 'homeAdmin/estadisticas', component: EstadisticasPrincipalComponent},
+  {path: 'homeAdmin/torneos/:nombre/partidos', component:PartidosComponent},
+  {path: 'homeAdmin/torneos/:nombre/equipos', component:EquiposComponent},
+  {path: 'homeAdmin/torneos/:nombre/tabla', component:TablaComponent},
+  {path: 'homeAdmin/torneos/:nombre/graficas', component:GraficasComponent}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

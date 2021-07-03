@@ -1,0 +1,181 @@
+<section>
+    <div class="container pr-0 pl-0">
+        <app-torneo></app-torneo>
+
+        <div class="w-100 row m-2" *ngIf="verify==1">
+            <div class="card mr-2 ml-2" style="width: 18rem;">
+                <img class="card-img-top" style="height: 9rem;" src=".../../../../../../../assets/login.png" alt="Card image cap">
+                <div class="card-body">
+                <h5 class="card-title">EQUIPO 1</h5>
+                <p class="card-text text-muted">partidos Jugados: 0</p>
+                <p class="card-text text-success">partidos ganados: 0</p>
+                <p class="card-text text-warning">partidos empatados: 0</p>
+                <p class="card-text text-danger">partidos perdidos: 0</p>
+                <button  class="btn btn-primary" (click)="changeVerify(2)">Ver Plantilla</button>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem; min-height: 20.5rem;">
+                <div class="card-body text-center row align-items-center justify-content-center">
+                    <div>
+                    <h1 class="card-title text-muted">Agregar Equipo</h1>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarEquipo">
+                            Agregar Equipo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="verify==2" class="mt-2">
+            <div class="row m-0" style="justify-content: flex-end;">
+                <button (click)="changeVerify(1)" class="btn btn-danger">X</button>
+            </div>
+            <div class="w-100 text-center mt-1">
+                <h2 class="text-muted">PLANTILLA DE EQUIPO 1</h2>
+            </div>
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">Dorsal</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Posición</th>
+                    <th scope="col">Goles</th>
+                    <th scope="col">Tarjetas</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>Delantero</td>
+                    <td>10</td>
+                    <td>1</td>
+                    <td><button type="button" data-toggle="modal" data-target="#editarJugador" class="btn btn-warning text-light">Editar</button></td>
+                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarJugador">Eliminar</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>Delantero</td>
+                    <td>10</td>
+                    <td>1</td>
+                    <td><button type="button" class="btn btn-warning text-light">Editar</button></td>
+                    <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="button" data-toggle="modal" data-target="#agregarJugador" class="btn btn-primary">
+                Agregar Jugador
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- agregar jugador-->
+
+<div class="modal fade" id="agregarJugador" tabindex="-1" role="dialog" aria-labelledby="agregarJugadorTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Agregar Jugador</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="text-muted" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="text-center">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nombre">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Apellido">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Dorsal">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Posición">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Guardar Jugador</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Agregar equipo-->
+
+<div class="modal fade" id="agregarEquipo" tabindex="-1" role="dialog" aria-labelledby="agregarEquipoTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Agregar Equipo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="text-muted" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="text-center">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nombre">
+            <input type="file" id="password" class="fadeIn third text-muted" name="login" placeholder="">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Guardar Equpo</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- editar jugador-->
+
+<div class="modal fade" id="editarJugador" tabindex="-1" role="dialog" aria-labelledby="editarJugadorTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Editar Jugador</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="text-muted" aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="text-center">
+          <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nombre">
+          <input type="text" id="login" class="fadeIn second" name="login" placeholder="Apellido">
+          <input type="text" id="login" class="fadeIn second" name="login" placeholder="Dorsal">
+          <input type="text" id="login" class="fadeIn second" name="login" placeholder="Posición">
+          <input type="text" id="login" class="fadeIn second" name="login" placeholder="Goles">
+          <input type="text" id="login" class="fadeIn second" name="login" placeholder="Tarjetas">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Guardar Jugador</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ELIMINAR JUGADOR-->
+
+<div class="modal fade" id="eliminarJugador" tabindex="-1" role="dialog" aria-labelledby="eliminarJugadorTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Jugador</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="text-muted" aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="text-light">¿Estas seguro que quieres eliminar este jugador?</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

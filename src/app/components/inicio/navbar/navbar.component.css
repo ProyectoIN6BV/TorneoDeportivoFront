@@ -1,0 +1,85 @@
+
+.navTop{
+    background-color: transparent !important;
+    position: absolute;
+    z-index: 4;
+}
+.trans{
+    background-color: #700707 !important;
+}
+
+.trans a{
+    color: white !important;
+}
+.trans a:hover{
+    background-color: transparent !important;
+    cursor: pointer;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(240, 238, 238, 0.3);
+    box-shadow: 0 30px 60px 0 rgba(240, 238, 238,0.3);
+}
+.nav-link{
+    color: white !important;
+}
+
+.color{
+    color: white !important;
+}
+.text-color{
+    color: #6c757d !important;
+}
+.text-muted{
+    color: #6c757d  !important;
+}
+.w-72{
+    width: 65%;
+}
+.navFixed{
+    background-color: #1F2021 !important;
+    position: fixed;
+    z-index: 4;
+    width: 100%;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+
+@media (max-width: 600px) {
+    .w-72 {
+      width: 100% !important;
+    }
+    .navTop{
+        position: static;
+        
+    }
+    .color{
+        color: #262626 !important;
+    }
+    .nav-link{
+        color: #6c757d !important;
+    }
+    .trans a{
+        color: #262626 !important;
+    }
+  }
+
+  .loader-container{
+      position: fixed;
+      width: 100%;
+      z-index: 99;
+  }
+
+  ::ng-deep .mat-progress-bar-fill::after {
+    background-color: #1E457C;
+}
+
+::ng-deep .mat-progress-bar-buffer {
+    background: #E4E8EB;
+}
+
+::ng-deep .mat-progress-bar {
+    border-radius: 2px;
+}
+
+.fix{
+    position: fixed;
+    z-index: 5;
+}

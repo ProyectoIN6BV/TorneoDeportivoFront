@@ -1,0 +1,19 @@
+.container{
+    background: #121212;
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+    height: 100vh;
+    padding-top:3rem;
+    position: relative;
+    z-index: 2;    
+}
+section{
+    background-color: #161616;
+}
+.menu2{
+    background-color: #222222;
+}
+.nav-link:hover{
+    color: white !important;
+}
+

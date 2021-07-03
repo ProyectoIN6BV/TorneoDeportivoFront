@@ -1,0 +1,83 @@
+
+<section>
+  <div class="container pr-0 pl-0">
+    <app-torneo></app-torneo>
+    <div class="w-100" *ngIf="verify2==1">
+      <div class="w-100 text-center mt-2">
+          <h2 class="text-light">JORNADA 1</h2>
+      </div>
+      <div class="w-100">
+          <div class="formContent">
+                  <h2 class="text-muted">Partido No. 1</h2>
+                  <span class="text-muted">Hora: 9:00</span><br>
+                  <span class="text-light">Resultado 0-0</span>
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <span class="text-light">NOMBRE EQUIPO 1</span>
+                      </div>
+                      <div class="col-lg-6">
+                          <span class="text-light">NOMBRE EQUIPO 2</span>
+                      </div>
+                  </div>
+                  <button type="button" class="btn btn-primary mt-2 mb-2" (click)="changeVerify(2)">
+                      Cambiar Resultado
+                  </button>
+          </div>  
+          
+      </div>
+        
+    </div>
+
+    <div class="w-100 mt-4" *ngIf="verify2==2">
+        <div class="row m-0" style="justify-content: flex-end;">
+            <button (click)="changeVerify(1)" class="btn btn-danger">X</button>
+        </div>
+        <div class="w-100 text-center row justify-content-center">
+            <h2 class="text-light">PARTIDO 1</h2><br>
+        </div>
+        <div class="w-100 text-center row justify-content-center">
+            
+            <h2 class="text-muted">RESULTADO {{contadorFinal}}-{{contadorFinal2}}</h2>
+        </div>
+        <table class="table table-hover table-dark">
+            <thead>
+              <tr>
+                <th scope="col">NOMBRES EQUIPO 1</th>
+                <th></th>
+                <th scope="col">GOLES</th>
+                <th></th>
+                <th scope="col">NOMBRES EQUIPO 2</th>
+                <th></th>
+                <th scope="col">GOLES</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">nombre 1</th>
+                <td><button class="btn btn-danger" (click)="contador1= contador1-1">-</button></td>
+                <td>{{contador1}}</td>
+                <td><button class="btn btn-success" (click)="contador1= contador1+1">+</button></td>
+                <td>Nombre 1</td>
+                <td><button class="btn btn-danger" (click)="contador2= contador2-1">-</button></td>
+                <td>{{contador2}}</td>
+                <td><button class="btn btn-success" (click)="contador2= contador2+1">+</button></td>
+              </tr>
+              <tr>
+                <th scope="row">nombre 2</th>
+                <td><button (click)="contador3= contador3-1" class="btn btn-danger">-</button></td>
+                <td>{{contador3}}</td>
+                <td><button (click)="contador3= contador3+1" class="btn btn-success">+</button></td>
+                <td>Nombre 2</td>
+                <td><button (click)="contador4= contador4-1" class="btn btn-danger">-</button></td>
+                <td>{{contador4}}</td>
+                <td><button (click)="contador4= contador4+1" class="btn btn-success">+</button></td>
+              </tr>
+            </tbody>
+          </table>
+            <div class="w-100 text-center">
+                <button class="Gbutton">Guardar Cambios</button>
+            </div>
+    </div>
+  </div>
+</section>
