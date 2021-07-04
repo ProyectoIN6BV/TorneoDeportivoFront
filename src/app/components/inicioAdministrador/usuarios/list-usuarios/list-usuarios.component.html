@@ -1,0 +1,47 @@
+<section>
+    <div class="container pr-0 pl-0">
+        <app-usuarios-principal></app-usuarios-principal>
+        <div class="w-100 mt-2 pt-2 pl-2">
+            <div class="card mr-2 ml-2" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">Usuario 1</h5>
+                <p class="card-text text-muted">Davis roldan</p>
+                <p class="card-text text-muted">Teléfono: 0000 0000</p>
+                <p class="card-text text-muted">email: davisrdln@gmail.com</p>
+                <a data-toggle="modal" data-target="#editarUsuario" class="btn btn-primary text-light">editar Usuario</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="modal fade" id="editarUsuario" tabindex="-1" role="dialog" aria-labelledby="editarUsuarioTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Editar Usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="text-muted" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="text-center">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nombre">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Apellido">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Teléfono">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="email">
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="username">
+            <select class="fadeIn second text-muted">
+                <option class="text-muted">ROLE_USER</option>
+                <option class="text-muted">ROLE_ADMIN</option>
+            </select>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-warning text-light">Editar Usuario</button>
+        </div>
+      </div>
+    </div>
+</div>

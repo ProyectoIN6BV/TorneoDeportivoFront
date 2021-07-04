@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EditarCuentaComponent } from './components/inicio/editar-cuenta/editar-cuenta.component';
 import { HomeComponent } from './components/inicio/home/home.component';
 import { RegisterComponent } from './components/inicio/register/register.component';
 import { ResultadosComponent } from './components/inicio/resultados/resultados.component';
@@ -11,6 +12,8 @@ import { PartidosComponent } from './components/inicioAdministrador/torneos/part
 import { TablaComponent } from './components/inicioAdministrador/torneos/tabla/tabla.component';
 import { TorneoInicioComponent } from './components/inicioAdministrador/torneos/torneo-inicio/torneo-inicio.component';
 import { TorneoComponent } from './components/inicioAdministrador/torneos/torneo/torneo.component';
+import { AddUsuarioComponent } from './components/inicioAdministrador/usuarios/add-usuario/add-usuario.component';
+import { ListUsuariosComponent } from './components/inicioAdministrador/usuarios/list-usuarios/list-usuarios.component';
 import { UsuariosPrincipalComponent } from './components/inicioAdministrador/usuarios/usuarios-principal/usuarios-principal.component';
 
 const routes: Routes = [
@@ -19,12 +22,15 @@ const routes: Routes = [
   {path:'results', component: ResultadosComponent},
   {path: 'homeAdmin', component: HomeAdministradorComponent},
   {path: 'homeAdmin/torneos', component:TorneoInicioComponent},
-  {path: 'homeAdmin/users', component:UsuariosPrincipalComponent},
+  {path: 'homeAdmin/users/listarusuario', component:ListUsuariosComponent},
   {path: 'homeAdmin/estadisticas', component: EstadisticasPrincipalComponent},
   {path: 'homeAdmin/torneos/:nombre/partidos', component:PartidosComponent},
   {path: 'homeAdmin/torneos/:nombre/equipos', component:EquiposComponent},
   {path: 'homeAdmin/torneos/:nombre/tabla', component:TablaComponent},
-  {path: 'homeAdmin/torneos/:nombre/graficas', component:GraficasComponent}
+  {path: 'homeAdmin/torneos/:nombre/graficas', component:GraficasComponent},
+  {path: 'homeAdmin/users/AddUsuario', component:AddUsuarioComponent},
+  {path: 'editAccount', component:EditarCuentaComponent}
+
 ];
 
 @NgModule({

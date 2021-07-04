@@ -23,6 +23,9 @@ import { EquiposComponent } from './components/inicioAdministrador/torneos/equip
 import { GraficasComponent } from './components/inicioAdministrador/torneos/graficas/graficas.component';
 import { TablaComponent } from './components/inicioAdministrador/torneos/tabla/tabla.component';
 import { ChartsModule } from 'ng2-charts';
+import { ListUsuariosComponent } from './components/inicioAdministrador/usuarios/list-usuarios/list-usuarios.component';
+import { AddUsuarioComponent } from './components/inicioAdministrador/usuarios/add-usuario/add-usuario.component';
+import { EditarCuentaComponent } from './components/inicio/editar-cuenta/editar-cuenta.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { ChartsModule } from 'ng2-charts';
     PartidosComponent,
     EquiposComponent,
     GraficasComponent,
-    TablaComponent
+    TablaComponent,
+    ListUsuariosComponent,
+    AddUsuarioComponent,
+    EditarCuentaComponent
   ],
   imports: [
     BrowserModule,
