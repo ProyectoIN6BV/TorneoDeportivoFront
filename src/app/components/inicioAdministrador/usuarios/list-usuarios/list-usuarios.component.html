@@ -1,14 +1,15 @@
 <section>
     <div class="container pr-0 pl-0">
         <app-usuarios-principal></app-usuarios-principal>
-        <div class="w-100 mt-2 pt-2 pl-2">
-            <div class="card mr-2 ml-2" style="width: 18rem;">
+        <div class="w-100 mt-2 pt-2 pl-2 row">
+            <div *ngFor="let user of users" class="card mr-2 ml-2" style="width: 18rem;">
                 <div class="card-body">
-                <h5 class="card-title">Usuario 1</h5>
-                <p class="card-text text-muted">Davis roldan</p>
-                <p class="card-text text-muted">Teléfono: 0000 0000</p>
-                <p class="card-text text-muted">email: davisrdln@gmail.com</p>
-                <a data-toggle="modal" data-target="#editarUsuario" class="btn btn-primary text-light">editar Usuario</a>
+                <h5 class="card-title">{{user.username}}</h5>
+                <p class="card-text text-muted">{{user.name}} {{user.lastname}}</p>
+                <p class="card-text text-muted">Teléfono: {{user.phone}}</p>
+                <p class="card-text text-muted">email: {{user.email}}</p>
+                <a data-toggle="modal" (click)="clickUserSelected(user)" *ngIf="user.role != 'ROLE_ADMINLEAGUE'" data-target="#editarUsuario" class="btn btn-primary text-light">editar Usuario</a>
+                <a  *ngIf="user.role == 'ROLE_ADMINLEAGUE'"  class="btn disabled btn-warning text-light">Usuario Administrador</a>
                 </div>
             </div>
         </div>
@@ -20,28 +21,29 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Editar Usuario</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Editar Usuario {{userSelected.name}}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span class="text-muted" aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <form class="text-center">
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nombre">
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Apellido">
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Teléfono">
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="email">
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="username">
-            <select class="fadeIn second text-muted">
-                <option class="text-muted">ROLE_USER</option>
-                <option class="text-muted">ROLE_ADMIN</option>
+            <input #name="ngModel" [(ngModel)]="userSelected2.name" type="text" id="name" class="fadeIn second" name="name" placeholder="Nombre">
+            <input #lastname="ngModel" [(ngModel)]="userSelected2.lastname" type="text" id="lastname" class="fadeIn second" name="lastname" placeholder="Apellido">
+            <input type="text" #phone="ngModel" [(ngModel)]="userSelected2.phone" id="phone" class="fadeIn second" name="phone" placeholder="Teléfono">
+            <input type="text" #email="ngModel" [(ngModel)]="userSelected2.email" id="email" class="fadeIn second" name="email" placeholder="email">
+            <input type="text" #username="ngModel" [(ngModel)]="userSelected2.username" id="username" class="fadeIn second" name="username" placeholder="username">
+            <select class="fadeIn second text-muted" id="role" name="role" #role="ngModel" [(ngModel)]="userSelected2.role">
+                <option class="text-muted" selected>ROLE_USER</option>
+                <option class="text-muted">ROLE_ADMINLEAGUE</option>
             </select>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-warning text-light">Editar Usuario</button>
+          <button type="button"(click)="updateUser()" data-dismiss="modal" class="btn btn-warning text-light">Editar Usuario</button>
         </div>
       </div>
     </div>
 </div>
+<notifier-container></notifier-container>

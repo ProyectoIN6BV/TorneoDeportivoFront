@@ -10,18 +10,29 @@
             </div>
         
             <!-- Login Form -->
-            <form>
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nombre">
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Apellido">
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Teléfono">
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Correo">
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Username">
-                <input type="submit" class="fadeIn fourth" value="Editar Cuenta">
+            <form #editAccount="ngForm" (ngSubmit)="onClick()">
+                
+                <input required #name="ngModel" [(ngModel)]="user.name" type="text" id="name" class="fadeIn second" name="name" placeholder="Nombre">
+                <br><span style="color: red;" *ngIf="!name.valid && name.touched">Campo Obligatorio</span>
+                
+                <input required #lastname="ngModel" [(ngModel)]="user.lastname" type="text" id="lastname" class="fadeIn second" name="lastname" placeholder="Apellido">
+                <br><span style="color: red;" *ngIf="!lastname.valid && lastname.touched">Campo Obligatorio</span>
+                
+                <input required  #phone="ngModel" [(ngModel)]="user.phone" type="text" id="phone" class="fadeIn second" name="phone" placeholder="Teléfono">
+                <br><span style="color: red;" *ngIf="!phone.valid && phone.touched">Campo Obligatorio</span>
+                
+                <input required  #email="ngModel" [(ngModel)]="user.email" type="text" id="email" class="fadeIn second" name="email" placeholder="Correo">
+                <br><span style="color: red;" *ngIf="!email.valid && email.touched">Campo Obligatorio</span>
+                
+                <input required  #username="ngModel" [(ngModel)]="user.username" type="text" id="username" class="fadeIn second" name="username" placeholder="Username">
+                <br><span style="color: red;" *ngIf="!username.valid && username.touched">Campo Obligatorio</span>
+                
+                <input   type="submit"  [disabled]="!editAccount.form.valid" class="fadeIn fourth" value="Editar Cuenta">
             </form>
         
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                <a class="underlineHover" href="">Unete a nuestra Familia</a>
+                <a class="underlineHover">Unete a nuestra Familia</a>
             </div>
         
             </div>
@@ -30,3 +41,4 @@
     </div>
     
 </section>
+<notifier-container></notifier-container>

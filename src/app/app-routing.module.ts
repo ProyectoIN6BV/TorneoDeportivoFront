@@ -15,12 +15,13 @@ import { TorneoComponent } from './components/inicioAdministrador/torneos/torneo
 import { AddUsuarioComponent } from './components/inicioAdministrador/usuarios/add-usuario/add-usuario.component';
 import { ListUsuariosComponent } from './components/inicioAdministrador/usuarios/list-usuarios/list-usuarios.component';
 import { UsuariosPrincipalComponent } from './components/inicioAdministrador/usuarios/usuarios-principal/usuarios-principal.component';
+import { AdminGuard } from './guards/adminGuards/admin-guards.guard';
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
   {path:'register', component: RegisterComponent},
   {path:'results', component: ResultadosComponent},
-  {path: 'homeAdmin', component: HomeAdministradorComponent},
+  {path: 'homeAdmin',canActivate:[AdminGuard], component: HomeAdministradorComponent},
   {path: 'homeAdmin/torneos', component:TorneoInicioComponent},
   {path: 'homeAdmin/users/listarusuario', component:ListUsuariosComponent},
   {path: 'homeAdmin/estadisticas', component: EstadisticasPrincipalComponent},

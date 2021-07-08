@@ -11,16 +11,28 @@
             </div>
         
             <!-- Login Form -->
-            <form>
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="nombre">
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="Apellido">
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="Teléfono">
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="email">
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="usuario">
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="Contraseña">
-                <select class="fadeIn second text-muted">
-                    <option class="text-muted">ROLE_USER</option>
-                    <option class="text-muted">ROLE_ADMIN</option>
+            <form #add="ngForm" (ngSubmit)="onSubmit(add)">
+                <input required #name="ngModel" [(ngModel)]="user.name" type="text" id="name" class="fadeIn second" name="name" placeholder="nombre">
+                <br><span style="color: red;" *ngIf="!name.valid && name.touched">Campo Obligatorio</span>
+
+                <input required #lastname="ngModel" [(ngModel)]="user.lastname" type="text" id="lastname" class="fadeIn third" name="lastname" placeholder="Apellido">
+                <br><span style="color: red;" *ngIf="!lastname.valid && lastname.touched">Campo Obligatorio</span>
+
+                <input required #phone="ngModel" [(ngModel)]="user.phone" type="text" id="phone" class="fadeIn third" name="phone" placeholder="Teléfono">
+                <br><span style="color: red;" *ngIf="!phone.valid && phone.touched">Campo Obligatorio</span>
+
+                <input required #email="ngModel" [(ngModel)]="user.email" type="text" id="email" class="fadeIn third" name="email" placeholder="email">
+                <br><span style="color: red;" *ngIf="!email.valid && email.touched">Campo Obligatorio</span>
+
+                <input required #username="ngModel" [(ngModel)]="user.username" type="text" id="username" class="fadeIn third" name="username" placeholder="usuario">
+                <br><span style="color: red;" *ngIf="!username.valid && username.touched">Campo Obligatorio</span>
+
+                <input required #password="ngModel" [(ngModel)]="user.password" type="text" id="password" class="fadeIn third" name="password" placeholder="Contraseña">
+                <br><span style="color: red;" *ngIf="!password.valid && password.touched">Campo Obligatorio</span>
+
+                <select required class="fadeIn second text-muted" id="role" name="role" #role="ngModel" [(ngModel)]="user.role">
+                    <option class="text-muted" selected>ROLE_USER</option>
+                    <option class="text-muted">ROLE_ADMINLEAGUE</option>
                 </select>
                 <input type="submit" class="fadeIn fourth" value="Registrar">
             </form>
@@ -34,3 +46,5 @@
         </div>
     </div>
 </section>
+
+<notifier-container></notifier-container>

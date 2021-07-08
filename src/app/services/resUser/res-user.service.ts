@@ -61,5 +61,53 @@ export class ResUserService {
     return this.http.post(this.uri+'saveUser', params, this.httpOptions)
     .pipe(map(this.extractData));
   }
+  login(user, param){
+    user.getToken = param;
+    let params = JSON.stringify(user);
+    return this.http.post(this.uri+'login', params, this.httpOptions)
+    .pipe(map(this.extractData));
+  }
+
+  update(user){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken()
+    })
+    let params = JSON.stringify(user);
+    return this.http.put(this.uri+'updateUser/'+user._id, params, {headers:headers})
+    .pipe(map(this.extractData));
+    
+  }
+
+  updatebyAdmin(user){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken()
+    })
+    let params = JSON.stringify(user);
+    return this.http.put(this.uri+'updateUserAdmin/'+user._id, params, {headers:headers})
+    .pipe(map(this.extractData));
+    
+  }
+
+  listusers(){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken()
+    })
+    return this.http.get(this.uri+'getUsers',{headers:headers})
+    .pipe(map(this.extractData));
+  }
+  
+  saveUserByAdmin(user){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken()
+    })
+    let params = JSON.stringify(user);
+    return this.http.post(this.uri+'saveUserAdmin', params,{headers:headers})
+    .pipe(map(this.extractData));
+  }
+  
 
 }

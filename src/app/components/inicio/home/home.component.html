@@ -14,9 +14,11 @@
             </div>
         
             <!-- Login Form -->
-            <form>
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+            <form #login= "ngForm" (ngSubmit)="onclick(login)">
+                <input #username="ngModel" [(ngModel)]="user.username" type="text" id="username"  required class="fadeIn second" name="username" placeholder="username">
+                <br><span style="color: red;" *ngIf="!username.valid && username.touched">Campo Obligatorio</span>
+                <input type="password"  #password="ngModel" [(ngModel)]="user.password" id="password" required class="fadeIn third" name="password" placeholder="password">
+                <br><span style="color: red;" *ngIf="!password.valid && password.touched">Campo Obligatorio</span><br>
                 <input type="submit" class="fadeIn fourth" value="Log In">
             </form>
         
@@ -30,3 +32,5 @@
     </div>
     
 </section>
+
+<notifier-container></notifier-container>
