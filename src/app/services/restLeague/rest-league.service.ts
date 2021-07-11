@@ -92,4 +92,13 @@ export class RestLeagueService {
       xhr.send(formData);
     })
   }
+
+  listLeagueUser(id){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken()
+    })
+    return this.http.get(this.uri+"getLeagueUser/"+id,{headers:headers})
+    .pipe(map(this.extractData))
+  }
 }

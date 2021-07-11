@@ -72,10 +72,10 @@ export class HomeUserComponent implements OnInit {
   }
   
   getLeagues(){
-    this.restLeague.listLeague().subscribe((res:any)=>{
+    this.restLeague.listLeagueUser(this.user._id).subscribe((res:any)=>{
       console.log(res)
-      if(res.leagues){
-        this.leagues = res.leagues;
+      if(res.users){
+        this.leagues = res.users.leagues;
       }else{
         this.notifier.notify("error",res.message);
       }
@@ -83,6 +83,7 @@ export class HomeUserComponent implements OnInit {
       this.notifier.notify("error",error.error.nessage))
   }
   ngOnInit(): void {
+    this.getLeagues();
     setTimeout(()=>{
       this.loader.isLoading.next(false);
     },1000)
