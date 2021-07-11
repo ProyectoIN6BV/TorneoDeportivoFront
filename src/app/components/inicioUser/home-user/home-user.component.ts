@@ -1,18 +1,19 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LoaderService } from 'src/app/services/loader/loader.service';
+import { RestLeagueService } from 'src/app/services/restLeague/rest-league.service';
+import { ResUserService } from 'src/app/services/resUser/res-user.service';
 import {  Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { League } from 'src/app/models/League';
 import { User } from 'src/app/models/User';
 import { CONNECTION } from 'src/app/services/global';
-import { LoaderService } from 'src/app/services/loader/loader.service';
-import { RestLeagueService } from 'src/app/services/restLeague/rest-league.service';
-import { ResUserService } from 'src/app/services/resUser/res-user.service';
+
 @Component({
-  selector: 'app-torneo-inicio',
-  templateUrl: './torneo-inicio.component.html',
-  styleUrls: ['./torneo-inicio.component.css']
+  selector: 'app-home-user',
+  templateUrl: './home-user.component.html',
+  styleUrls: ['./home-user.component.css']
 })
-export class TorneoInicioComponent implements OnInit {
+export class HomeUserComponent implements OnInit {
   private readonly notifier;
   public league:League;
   public user:User;
@@ -20,7 +21,7 @@ export class TorneoInicioComponent implements OnInit {
   public fileLeagues:Array<File>;
   public uri;
   token;
-
+  
   constructor(private route:Router, public loader: LoaderService, private restLeague: RestLeagueService, private restNotifier:NotifierService, private restUser:ResUserService){ 
     this.notifier = restNotifier;
     this.league = new League('','','','',null,null,[],[])
@@ -28,15 +29,6 @@ export class TorneoInicioComponent implements OnInit {
     this.token = restUser.getToken();
     this.uri = CONNECTION.URI;
   }
-
-
-  ngOnInit(): void {
-    this.getLeagues();
-    setTimeout(()=>{
-      this.loader.isLoading.next(false);
-    },1000)
-  }
-
 
   onSubmit(){
     this.restLeague.saveLeague(this.league).subscribe((res:any)=>{
@@ -51,7 +43,7 @@ export class TorneoInicioComponent implements OnInit {
         this.notifier.notify("error",error.error.message)
     })
   }
-
+  
   updateUser(leagueFind){
     this.restUser.setLeagueUser(this.user, leagueFind).subscribe((res:any)=>{
       if(res.pushUser){
@@ -78,7 +70,7 @@ export class TorneoInicioComponent implements OnInit {
       this.getLeagues();
     });
   }
-
+  
   getLeagues(){
     this.restLeague.listLeague().subscribe((res:any)=>{
       console.log(res)
@@ -90,8 +82,14 @@ export class TorneoInicioComponent implements OnInit {
     }, error=>
       this.notifier.notify("error",error.error.nessage))
   }
+  ngOnInit(): void {
+    setTimeout(()=>{
+      this.loader.isLoading.next(false);
+    },1000)
+  }
 
   fileChange(fileInput){
     this.fileLeagues = <Array<File>>fileInput.target.files;
   }
-} 
+
+}

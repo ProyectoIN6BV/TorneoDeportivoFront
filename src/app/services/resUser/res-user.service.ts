@@ -30,7 +30,7 @@ export class ResUserService {
     return body || [] || {};
   }
 
-  getToken(){
+  public getToken(){
     let token = localStorage.getItem("token");
     if(token != null || token != undefined){
       this.token = token;
@@ -41,7 +41,7 @@ export class ResUserService {
     return this.token;
   }
 
-  getUser(){
+  public getUser(){
     let user = JSON.parse(localStorage.getItem("user"));
     if(user != null || user != undefined){
       this.user = user;
@@ -109,5 +109,15 @@ export class ResUserService {
     .pipe(map(this.extractData));
   }
   
+
+  setLeagueUser(user, League){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken()
+    })
+    let params = JSON.stringify(League);
+    return this.http.put(this.uri+'setUserLeague/'+user._id, params, {headers:headers})
+    .pipe(map(this.extractData));
+  }
 
 }

@@ -43,7 +43,11 @@ export class HomeComponent implements OnInit {
             this.user = res.user;
             
             login.reset();
-            this.router.navigateByUrl("homeAdmin")
+            if(this.user.role=="ROLE_USER"){
+              this.router.navigateByUrl("home");
+            }else if(this.user.role=="ROLE_ADMINLEAGUE"){
+              this.router.navigateByUrl("homeAdmin")
+            }
           },1000)
          
 

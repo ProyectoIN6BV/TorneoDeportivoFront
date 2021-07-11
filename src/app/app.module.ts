@@ -28,6 +28,11 @@ import { AddUsuarioComponent } from './components/inicioAdministrador/usuarios/a
 import { EditarCuentaComponent } from './components/inicio/editar-cuenta/editar-cuenta.component';
 import { FormsModule } from '@angular/forms';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import { HomeUserComponent } from './components/inicioUser/home-user/home-user.component';
+import { NavbarTorneoComponent } from './components/inicioUser/torneos/navbar-torneo/navbar-torneo.component';
+import { TorneoInicioUserComponent } from './components/inicioUser/torneos/torneo-inicio-user/torneo-inicio-user.component';
+import { PartidosUserComponent } from './components/inicioUser/torneos/partidos-user/partidos-user.component';
+import { EquiposUserComponent } from './components/inicioUser/torneos/equipos-user/equipos-user.component';
 
 
 const customNotifierOptions: NotifierOptions = {
@@ -91,7 +96,12 @@ const customNotifierOptions: NotifierOptions = {
     TablaComponent,
     ListUsuariosComponent,
     AddUsuarioComponent,
-    EditarCuentaComponent
+    EditarCuentaComponent,
+    HomeUserComponent,
+    NavbarTorneoComponent,
+    TorneoInicioUserComponent,
+    PartidosUserComponent,
+    EquiposUserComponent
   ],
   imports: [
     BrowserModule,
