@@ -12,7 +12,7 @@
                 <p class="card-text text-success">partidos ganados: 0</p>
                 <p class="card-text text-warning">partidos empatados: 0</p>
                 <p class="card-text text-danger">partidos perdidos: 0</p>
-                <button  class="btn btn-primary" (click)="changeVerify(2)">Ver Plantilla</button>
+                <button  class="btn btn-primary" (click)="changeVerify(2, team)">Ver Plantilla</button>
                 </div>
             </div>
             <div class="card" style="width: 18rem; min-height: 20.5rem;">
@@ -34,7 +34,7 @@
                 <button (click)="changeVerify(1)" class="btn btn-danger">X</button>
             </div>
             <div class="w-100 text-center mt-1">
-                <h2 class="text-muted">PLANTILLA DE EQUIPO 1</h2>
+                <h2 class="text-muted">PLANTILLA DE {{teamSelected.name}}</h2>
             </div>
             <table class="table table-dark">
                 <thead>
@@ -49,25 +49,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Delantero</td>
-                    <td>10</td>
-                    <td>1</td>
-                    <td><button type="button" data-toggle="modal" data-target="#editarJugador" class="btn btn-warning text-light">Editar</button></td>
-                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarJugador">Eliminar</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Delantero</td>
-                    <td>10</td>
-                    <td>1</td>
-                    <td><button type="button" class="btn btn-warning text-light">Editar</button></td>
-                    <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+                <tr *ngFor="let player of players">
+                    <th scope="row">{{player.dorsal}}</th>
+                    <td>{{player.name}}</td>
+                    <td>{{player.lastname}}</td>
+                    <td>{{player.position}}</td>
+                    <td>{{player.goal}}</td>
+                    <td>{{player.cardT}}</td>
+                    <td><button type="button" data-toggle="modal" data-target="#editarJugador" (click)="changePlayer(player)" class="btn btn-warning text-light">Editar</button></td>
+                    <td><button type="button" class="btn btn-danger" data-toggle="modal" (click)="changePlayer(player)" data-target="#eliminarJugador">Eliminar</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -91,16 +81,16 @@
           </button>
         </div>
         <div class="modal-body">
-          <form class="text-center">
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nombre">
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Apellido">
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Dorsal">
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Posición">
+          <form #addPlayer="ngForm"  class="text-center">
+            <input type="text" #name="ngModel" [(ngModel)]="player.name" id="name" class="fadeIn second" name="name" placeholder="Nombre">
+            <input type="text" #lastname="ngModel" [(ngModel)]="player.lastname" id="lastname" class="fadeIn second" name="lastname" placeholder="Apellido">
+            <input type="text" #dorsal="ngModel" [(ngModel)]="player.dorsal" id="dorsal" class="fadeIn second" name="dorsal" placeholder="Dorsal">
+            <input type="text" #position="ngModel" [(ngModel)]="player.position" id="position" class="fadeIn second" name="position" placeholder="Posición">
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Guardar Jugador</button>
+          <button type="button" class="btn btn-primary" (click)="savePlayer()" data-dismiss="modal">Guardar Jugador</button>
         </div>
       </div>
     </div>
@@ -143,18 +133,28 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="text-center">
-          <input type="text" id="login" class="fadeIn second" name="login" placeholder="Nombre">
-          <input type="text" id="login" class="fadeIn second" name="login" placeholder="Apellido">
-          <input type="text" id="login" class="fadeIn second" name="login" placeholder="Dorsal">
-          <input type="text" id="login" class="fadeIn second" name="login" placeholder="Posición">
-          <input type="text" id="login" class="fadeIn second" name="login" placeholder="Goles">
-          <input type="text" id="login" class="fadeIn second" name="login" placeholder="Tarjetas">
+        <form class="text-center" #editPlayer="ngForm">
+          <label class="text-muted">Nombre:</label><br>
+          <input #name="ngModel" [(ngModel)]="playerSelected.name" type="text" id="name" class="fadeIn second" name="name" placeholder="Nombre">
+          <br><label class="text-muted">Apellido:</label><br>
+          <input #lastname="ngModel" [(ngModel)]="playerSelected.lastname" type="text" id="lastname" class="fadeIn second" name="lastname" placeholder="Apellido">
+          <br><label class="text-muted">Dorsal:</label><br>
+          <input #dorsal="ngModel" [(ngModel)]="playerSelected.dorsal" type="text" id="dorsal" class="fadeIn second" name="dorsal" placeholder="Dorsal">
+          <br><label class="text-muted">Posición:</label><br>
+          <input #position="ngModel" [(ngModel)]="playerSelected.position" type="text" id="position" class="fadeIn second" name="position" placeholder="Posición">
+          <br><label class="text-muted">Goles:</label><br>
+          <input #goal="ngModel" [(ngModel)]="playerSelected.goal" type="text" id="goal" class="fadeIn second" name="goal" placeholder="Goles">
+          <br><label class="text-muted">Tarjetas Amarillas:</label><br>
+          <input #cardA="ngModel"  (input)="editTotal()" [(ngModel)]="playerSelected.cardA" type="text" id="cardA" class="fadeIn second" name="cardA" placeholder="Tarjetas Amarillas">
+          <br><label class="text-muted">Tarjetas Rojas:</label><br>
+          <input #cardR="ngModel" (input)="editTotal()" [(ngModel)]="playerSelected.cardR" type="text" id="cardR" class="fadeIn second" name="cardR" placeholder="Tarjetas Rojas">
+          <br><label class="text-muted">Tarjetas Totales</label><br>
+          <input #cardT="ngModel" [(ngModel)]="playerSelected.cardT" type="text" id="cardT" class="fadeIn second" name="cardT" placeholder="Tarjetas Totales">
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Guardar Jugador</button>
+        <button type="button" class="btn btn-secondary"  data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="edit()">Editar Jugador</button>
       </div>
     </div>
   </div>
@@ -177,7 +177,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Aceptar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="remove()">Aceptar</button>
       </div>
     </div>
   </div>

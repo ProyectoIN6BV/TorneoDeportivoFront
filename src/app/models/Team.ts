@@ -1,5 +1,6 @@
 export class Team {
     constructor(
+        public _id:String,
         public name: String,
         public logo: String,
         public points: Number,
