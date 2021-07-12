@@ -30,7 +30,7 @@ section{
 input[type=text], input[type=file] {
     background-color: #222222;
     border: none;
-    color: #0d0d0d;
+    color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;

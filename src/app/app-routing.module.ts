@@ -34,7 +34,11 @@ const routes: Routes = [
   {path: 'homeAdmin/torneos/:nombre/tabla', component:TablaComponent},
   {path: 'homeAdmin/torneos/:nombre/graficas', component:GraficasComponent},
   {path: 'homeAdmin/users/AddUsuario', component:AddUsuarioComponent},
-  {path: 'editAccount', component:EditarCuentaComponent}
+  {path: 'editAccount', component:EditarCuentaComponent},
+  {path: 'home/torneos/:nombre/partidos', component:PartidosComponent},
+  {path: 'home/torneos/:nombre/equipos', component:EquiposComponent},
+  {path: 'home/torneos/:nombre/tabla', component:TablaComponent},
+  {path: 'home/torneos/:nombre/graficas', component:GraficasComponent},
 
 ];
 
