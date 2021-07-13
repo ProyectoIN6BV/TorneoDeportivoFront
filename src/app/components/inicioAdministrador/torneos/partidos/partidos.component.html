@@ -1,31 +1,36 @@
 
 <section>
-  <div class="container pr-0 pl-0">
+  <div class="container p-3">
     <app-torneo></app-torneo>
     <div class="w-100" *ngIf="verify2==1">
-      <div class="w-100 text-center mt-2">
-          <h2 class="text-light">JORNADA 1</h2>
+      <div class="w-100 mt-2">
+        <button class="Gbutton" data-toggle="modal" data-target="#generarJornada">Generar Jornada</button>
       </div>
-      <div class="w-100">
-          <div class="formContent">
-                  <h2 class="text-muted">Partido No. 1</h2>
-                  <span class="text-muted">Hora: 9:00</span><br>
-                  <span class="text-light">Resultado 0-0</span>
-                  <div class="row">
-                      <div class="col-lg-6">
-                          <span class="text-light">NOMBRE EQUIPO 1</span>
-                      </div>
-                      <div class="col-lg-6">
-                          <span class="text-light">NOMBRE EQUIPO 2</span>
-                      </div>
-                  </div>
-                  <button type="button" class="btn btn-primary mt-2 mb-2" (click)="changeVerify(2)">
-                      Cambiar Resultado
-                  </button>
-          </div>  
-          
+      <div class="w-100" *ngFor="let session of sessions">
+        <div class="w-100 text-center mt-2">
+            <h2 class="text-light">{{session.name}}</h2>
+        </div>
+        <div class="w-100 row justify-content-center">
+            <div class="formContent m-2" *ngFor="let mat1 of session.matchs">
+                    <h2 class="text-muted">Partido No. 1</h2>
+                    <span class="text-muted">Hora: 9:00</span><br>
+                    <span class="text-light">Resultado 0-0</span>
+                    <div class="w-100 text-center">
+                        <div class="w-100" *ngFor="let mat of matches">
+                            <span class="text-light"  *ngIf="mat.playersOne[0]._id == mat1.playersOne && mat.playersSecond[0]._id == mat1.playersSecond">{{mat.playersOne[0].name}}</span>
+                        </div>
+                        <span class="text-muted">vs</span>
+                        <div class="w-100"  *ngFor="let mat of matches">
+                            <span class="text-light" *ngIf="mat.playersOne[0]._id == mat1.playersOne && mat.playersSecond[0]._id == mat1.playersSecond">{{mat.playersSecond[0].name}}</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary mt-2 mb-2" (click)="changeVerify(2)">
+                        Cambiar Resultado
+                    </button>
+            </div>  
+            
+        </div>
       </div>
-        
     </div>
 
     <div class="w-100 mt-4" *ngIf="verify2==2">
@@ -81,3 +86,29 @@
     </div>
   </div>
 </section>
+<notifier-container></notifier-container>
+
+<!-- Modal -->
+<div class="modal fade" id="generarJornada" tabindex="-1" role="dialog" aria-labelledby="generarJornadaLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="generarJornadaLabel">Generar Jornada</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="w-100 text-center">
+          <label class="text-light">Fecha de Inicio:</label>
+          <input type="date" #dateFirst ="ngModel" [(ngModel)]="session.dateFirst" name="dateFirst" id="dateFirst">
+          <label class="text-danger">SI TIENES UNA JORNADA EN CURSO SE ELIMINARÁ</label>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="createMatch()" data-dismiss="modal">Generar Jornada</button>
+      </div>
+    </div>
+  </div>
+</div>
