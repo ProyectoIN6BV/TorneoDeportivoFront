@@ -62,4 +62,16 @@ export class ListUsuariosComponent implements OnInit {
       this.getUsersData();
     })
   }
+
+  removeUser(){
+    this.restUser.removeUser(this.userSelected2._id).subscribe((res:any)=>{
+      if(res.removeUser){
+        this.notifier.notify("success", res.message);
+        this.getUsersData();
+      }else{
+        this.getUsersData();
+        this.notifier.notify("error", res.message);
+      }
+    }, error=>      this.notifier.notify("error", error.error.message))
+  }
 }

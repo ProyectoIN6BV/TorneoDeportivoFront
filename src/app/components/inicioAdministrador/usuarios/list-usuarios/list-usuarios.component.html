@@ -8,8 +8,9 @@
                 <p class="card-text text-muted">{{user.name}} {{user.lastname}}</p>
                 <p class="card-text text-muted">Teléfono: {{user.phone}}</p>
                 <p class="card-text text-muted">email: {{user.email}}</p>
-                <a data-toggle="modal" (click)="clickUserSelected(user)" *ngIf="user.role != 'ROLE_ADMINLEAGUE'" data-target="#editarUsuario" class="btn btn-primary text-light">editar Usuario</a>
-                <a  *ngIf="user.role == 'ROLE_ADMINLEAGUE'"  class="btn disabled btn-warning text-light">Usuario Administrador</a>
+                <a data-toggle="modal" (click)="clickUserSelected(user)" *ngIf="user.role != 'ROLE_ADMINLEAGUE'" data-target="#editarUsuario" class="btn mb-2 btn-primary text-light">editar Usuario</a>
+                <a  *ngIf="user.role == 'ROLE_ADMINLEAGUE'"  class="btn disabled btn-warning text-light mb-2">Usuario Administrador</a>
+                <a data-toggle="modal" (click)="clickUserSelected(user)" *ngIf="user.role != 'ROLE_ADMINLEAGUE'" data-target="#eliminarUser" class="btn btn-danger text-light">Eliminar Usuario</a>
                 </div>
             </div>
         </div>
@@ -45,5 +46,28 @@
         </div>
       </div>
     </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="eliminarUser" tabindex="-1" role="dialog" aria-labelledby="eliminarUserTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eliminarUserTitle">ELIMINAR USUARIO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-danger">¿Está seguro que desea eliminar este usuario?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="removeUser()">Eliminar Usuario</button>
+      </div>
+    </div>
+  </div>
 </div>
 <notifier-container></notifier-container>

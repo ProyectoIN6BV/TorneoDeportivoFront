@@ -52,7 +52,9 @@ export class EquiposComponent implements OnInit {
     this.teamSelected = team;
     this.getPlayers();
   }
-
+  changeVerify2(dato){
+    this.verify = dato;
+  }
   edit(){
     this.restPlayer.editPlayer(this.playerSelected._id, this.playerSelected).subscribe((res:any)=>{
       if(res.playerUpdate){

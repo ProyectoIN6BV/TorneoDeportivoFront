@@ -19,16 +19,22 @@ export class TorneoInicioComponent implements OnInit {
   public leagues:[];
   public fileLeagues:Array<File>;
   public uri;
+  public leagueSelected:League;
+
   token;
 
   constructor(private route:Router, public loader: LoaderService, private restLeague: RestLeagueService, private restNotifier:NotifierService, private restUser:ResUserService){ 
     this.notifier = restNotifier;
-    this.league = new League('','','','',null,null,[],[])
+    this.league = new League('','','','','',null,null,[],[]);
+    this.leagueSelected = new League('','','','','',null,null,[],[]);
     this.user = restUser.getUser();
     this.token = restUser.getToken();
     this.uri = CONNECTION.URI;
   }
 
+  selectLeague(league){
+    this.leagueSelected = league;
+  }
 
   ngOnInit(): void {
     this.getLeagues();
@@ -81,16 +87,25 @@ export class TorneoInicioComponent implements OnInit {
 
   getLeagues(){
     this.restLeague.listLeague().subscribe((res:any)=>{
-      console.log(res)
       if(res.leagues){
         this.leagues = res.leagues;
       }else{
         this.notifier.notify("error",res.message);
       }
     }, error=>
-      this.notifier.notify("error",error.error.nessage))
+      this.notifier.notify("error",error.error.message))
   }
-
+  removeLeague(){
+    this.restLeague.removeLeague(this.leagueSelected._id).subscribe((res:any)=>{
+      if(res.removeLeague){
+        this.notifier.notify("success",res.message);
+        this.getLeagues();
+      }else{
+        this.notifier.notify("error",res.message);
+      }
+    }, error=>      this.notifier.notify("error",error.error.message))
+    
+  }
   fileChange(fileInput){
     this.fileLeagues = <Array<File>>fileInput.target.files;
   }

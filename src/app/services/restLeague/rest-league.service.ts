@@ -101,4 +101,12 @@ export class RestLeagueService {
     return this.http.get(this.uri+"getLeagueUser/"+id,{headers:headers})
     .pipe(map(this.extractData))
   }
+  removeLeague(id){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken()
+    })
+    return this.http.put(this.uri+"removeLeague/"+id,{},{headers:headers})
+    .pipe(map(this.extractData))
+  }
 }

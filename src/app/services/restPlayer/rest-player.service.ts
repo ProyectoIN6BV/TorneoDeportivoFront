@@ -92,4 +92,14 @@ export class RestPlayerService {
     return this.http.put(this.uri+'removePlayer/'+id, {headers:headers})
     .pipe(map(this.extractData))
   }
+
+  updatePlayerPoint(player){
+    let params = JSON.stringify(player);
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken()
+    })
+    return this.http.put(this.uri+'updatePointPlayer/'+player["_id"],params, {headers:headers})
+    .pipe(map(this.extractData))
+  }
 }

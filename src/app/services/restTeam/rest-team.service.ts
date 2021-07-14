@@ -105,4 +105,23 @@ export class RestTeamService {
       xhr.send(formData);
     })
   }
+
+  getTeam(id){
+    let  headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken()
+    })
+    return this.http.get(this.uri+"getTeam/"+id, {headers:headers})
+    .pipe(map(this.extractData));
+  }
+
+
+  getPosition(id){
+    let  headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken()
+    })
+    return this.http.get(this.uri+"listaPosition/"+id, {headers:headers})
+    .pipe(map(this.extractData));
+  }
 }

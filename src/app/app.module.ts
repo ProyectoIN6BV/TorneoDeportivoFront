@@ -16,7 +16,6 @@ import { ResultadosComponent } from './components/inicio/resultados/resultados.c
 import { HomeAdministradorComponent } from './components/inicioAdministrador/home-administrador/home-administrador.component';
 import { TorneoInicioComponent } from './components/inicioAdministrador/torneos/torneo-inicio/torneo-inicio.component';
 import { UsuariosPrincipalComponent } from './components/inicioAdministrador/usuarios/usuarios-principal/usuarios-principal.component';
-import { EstadisticasPrincipalComponent } from './components/inicioAdministrador/estadisticas/estadisticas-principal/estadisticas-principal.component';
 import { TorneoComponent } from './components/inicioAdministrador/torneos/torneo/torneo.component';
 import { PartidosComponent } from './components/inicioAdministrador/torneos/partidos/partidos.component';
 import { EquiposComponent } from './components/inicioAdministrador/torneos/equipos/equipos.component';
@@ -88,7 +87,6 @@ const customNotifierOptions: NotifierOptions = {
     HomeAdministradorComponent,
     TorneoInicioComponent,
     UsuariosPrincipalComponent,
-    EstadisticasPrincipalComponent,
     TorneoComponent,
     PartidosComponent,
     EquiposComponent,

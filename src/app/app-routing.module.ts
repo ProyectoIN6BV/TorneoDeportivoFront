@@ -4,7 +4,6 @@ import { EditarCuentaComponent } from './components/inicio/editar-cuenta/editar-
 import { HomeComponent } from './components/inicio/home/home.component';
 import { RegisterComponent } from './components/inicio/register/register.component';
 import { ResultadosComponent } from './components/inicio/resultados/resultados.component';
-import { EstadisticasPrincipalComponent } from './components/inicioAdministrador/estadisticas/estadisticas-principal/estadisticas-principal.component';
 import { HomeAdministradorComponent } from './components/inicioAdministrador/home-administrador/home-administrador.component';
 import { EquiposComponent } from './components/inicioAdministrador/torneos/equipos/equipos.component';
 import { GraficasComponent } from './components/inicioAdministrador/torneos/graficas/graficas.component';
@@ -28,7 +27,6 @@ const routes: Routes = [
   {path: 'homeAdmin',canActivate:[AdminGuard], component: HomeAdministradorComponent},
   {path: 'homeAdmin/torneos', component:TorneoInicioComponent},
   {path: 'homeAdmin/users/listarusuario', component:ListUsuariosComponent},
-  {path: 'homeAdmin/estadisticas', component: EstadisticasPrincipalComponent},
   {path: 'homeAdmin/torneos/:nombre/partidos', component:PartidosComponent},
   {path: 'homeAdmin/torneos/:nombre/equipos', component:EquiposComponent},
   {path: 'homeAdmin/torneos/:nombre/tabla', component:TablaComponent},

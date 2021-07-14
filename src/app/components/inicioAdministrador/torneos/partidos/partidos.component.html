@@ -1,6 +1,6 @@
 
 <section>
-  <div class="container p-3">
+  <div class="container p-3 pt-5">
     <app-torneo></app-torneo>
     <div class="w-100" *ngIf="verify2==1">
       <div class="w-100 mt-2">
@@ -11,10 +11,9 @@
             <h2 class="text-light">{{session.name}}</h2>
         </div>
         <div class="w-100 row justify-content-center">
-            <div class="formContent m-2" *ngFor="let mat1 of session.matchs">
-                    <h2 class="text-muted">Partido No. 1</h2>
-                    <span class="text-muted">Hora: 9:00</span><br>
-                    <span class="text-light">Resultado 0-0</span>
+            <div class="formContent m-2" *ngFor="let mat1 of session.matchs; let indice=index">
+                    <h2 class="text-muted">Partido No. {{indice+1}}</h2>
+                    <span class="text-light">Resultado {{mat1.goalsFirst}}-{{mat1.goalsSecond}}</span>
                     <div class="w-100 text-center">
                         <div class="w-100" *ngFor="let mat of matches">
                             <span class="text-light"  *ngIf="mat.playersOne[0]._id == mat1.playersOne && mat.playersSecond[0]._id == mat1.playersSecond">{{mat.playersOne[0].name}}</span>
@@ -24,7 +23,7 @@
                             <span class="text-light" *ngIf="mat.playersOne[0]._id == mat1.playersOne && mat.playersSecond[0]._id == mat1.playersSecond">{{mat.playersSecond[0].name}}</span>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary mt-2 mb-2" (click)="changeVerify(2)">
+                    <button type="button" class="btn btn-primary mt-2 mb-2" (click)="changeVerify(2,mat1, indice)">
                         Cambiar Resultado
                     </button>
             </div>  
@@ -35,53 +34,59 @@
 
     <div class="w-100 mt-4" *ngIf="verify2==2">
         <div class="row m-0" style="justify-content: flex-end;">
-            <button (click)="changeVerify(1)" class="btn btn-danger">X</button>
+            <button (click)="changeVerify2(1)" class="btn btn-danger">X</button>
         </div>
         <div class="w-100 text-center row justify-content-center">
-            <h2 class="text-light">PARTIDO 1</h2><br>
+            <h2 class="text-light">PARTIDO No. {{indice+1}}</h2><br>
         </div>
         <div class="w-100 text-center row justify-content-center">
             
             <h2 class="text-muted">RESULTADO {{contadorFinal}}-{{contadorFinal2}}</h2>
         </div>
-        <table class="table table-hover table-dark">
-            <thead>
-              <tr>
-                <th scope="col">NOMBRES EQUIPO 1</th>
-                <th></th>
-                <th scope="col">GOLES</th>
-                <th></th>
-                <th scope="col">NOMBRES EQUIPO 2</th>
-                <th></th>
-                <th scope="col">GOLES</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">nombre 1</th>
-                <td><button class="btn btn-danger" (click)="contador1= contador1-1">-</button></td>
-                <td>{{contador1}}</td>
-                <td><button class="btn btn-success" (click)="contador1= contador1+1">+</button></td>
-                <td>Nombre 1</td>
-                <td><button class="btn btn-danger" (click)="contador2= contador2-1">-</button></td>
-                <td>{{contador2}}</td>
-                <td><button class="btn btn-success" (click)="contador2= contador2+1">+</button></td>
-              </tr>
-              <tr>
-                <th scope="row">nombre 2</th>
-                <td><button (click)="contador3= contador3-1" class="btn btn-danger">-</button></td>
-                <td>{{contador3}}</td>
-                <td><button (click)="contador3= contador3+1" class="btn btn-success">+</button></td>
-                <td>Nombre 2</td>
-                <td><button (click)="contador4= contador4-1" class="btn btn-danger">-</button></td>
-                <td>{{contador4}}</td>
-                <td><button (click)="contador4= contador4+1" class="btn btn-success">+</button></td>
-              </tr>
-            </tbody>
-          </table>
+        <!-- tabla de equipo 1-->
+        <div class="table-responsive">
+            <table class="table table-hover table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">{{team1.name}}</th>
+                  <th></th>
+                  <th scope="col">GOLES</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let player of team1.players">
+                  <td scope="row">{{player.name}} {{player.lastname}}</td>
+                  <td><button class="btn btn-danger" (click)="restarGoles(player)">-</button></td>
+                  <td>{{player.goal}}</td>
+                  <td><button class="btn btn-success" (click)="sumarGoles(player)">+</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- tabla de equipo 2-->
+          <div class="table-responsive">
+            <table class="table table-hover table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">{{team2.name}}</th>
+                  <th></th>
+                  <th scope="col">GOLES</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let player of team2.players">
+                  <td scope="row">{{player.name}} {{player.lastname}}</td>
+                  <td><button class="btn btn-danger" (click)="restarGoles2(player)">-</button></td>
+                  <td>{{player.goal}}</td>
+                  <td><button class="btn btn-success" (click)="sumarGoles2(player)">+</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
             <div class="w-100 text-center">
-                <button class="Gbutton">Guardar Cambios</button>
+                <button class="Gbutton" (click)="saveMatch()">Guardar Cambios</button>
             </div>
     </div>
   </div>

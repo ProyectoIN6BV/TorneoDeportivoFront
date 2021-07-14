@@ -21,9 +21,6 @@
             <li class="nav-item" *ngIf="role == 'ROLE_ADMINLEAGUE'">
                 <a class="nav-link" (click)="quitarClaseTotal()" routerLink="homeAdmin" [ngClass]="{'text-muted':showFixed}" >Inicio Administrador</a>
             </li>
-            <li class="nav-item" >
-                <a class="nav-link" (click)="quitarClase()" routerLink="results" [ngClass]="{'text-muted':showFixed}" >Resultados</a>
-            </li>
             <li class="nav-item" *ngIf="token == '' ||  token==undefined || token==null">
                 <a class="nav-link" (click)="quitarClase()" routerLink="register" [ngClass]="{'text-muted':showFixed}" >Registrarme</a>
             </li>

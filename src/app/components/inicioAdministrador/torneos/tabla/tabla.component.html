@@ -5,9 +5,6 @@
             <h2 class="text-light">TABLA DE RESULTADOS</h2>
         </div>
         <div class="btn-group ml-2">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Resultados
-            </button>
             <div class="dropdown-menu dropdown-menu-right">
               <button class="dropdown-item" type="button">posiciones</button>
               <button class="dropdown-item" type="button">Goleo</button>
@@ -31,31 +28,20 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>equipo 1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <th scope="row">1</th>
-                <td>equipo 1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
+              <tr *ngFor="let team of teams; let indice=index">
+                <th scope="row">{{indice}}</th>
+                <td>{{team.name}}</td>
+                <td>{{team.PJ}}</td>
+                <td>{{team.PG}}</td>
+                <td>{{team.PE}}</td>
+                <td>{{team.PP}}</td>
+                <td>{{team.GF}}</td>
+                <td>{{team.GC}}</td>
+                <td>{{team.GD}}</td>
+                <td>{{team.points}}</td>
               </tr>
             </tbody>
           </table>
     </div>
 </section>
+<notifier-container></notifier-container>

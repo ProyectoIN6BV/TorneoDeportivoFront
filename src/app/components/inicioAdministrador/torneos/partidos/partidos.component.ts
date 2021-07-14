@@ -3,18 +3,18 @@ import { ActivatedRoute } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Session } from '../../../../models/Session';
 import { RestMatchService } from 'src/app/services/restMatch/rest-match.service';
+import { Match } from 'src/app/models/Match';
+import { Team } from 'src/app/models/Team';
+import { RestTeamService } from 'src/app/services/restTeam/rest-team.service';
+import { RestPlayerService } from 'src/app/services/restPlayer/rest-player.service';
 
 @Component({
   selector: 'app-partidos',
   templateUrl: './partidos.component.html',
   styleUrls: ['./partidos.component.css']
 })
-export class PartidosComponent implements OnInit, DoCheck {
+export class PartidosComponent implements OnInit {
   public verify2=1;
-  public contador1=0;
-  public contador2=0;
-  public contador3=0;
-  public contador4=0;
   public contadorFinal=0;
   public contadorFinal2=0;
   public session:Session;
@@ -22,33 +22,89 @@ export class PartidosComponent implements OnInit, DoCheck {
   leagueId;
   sessions:[];
   matches:[];
-  constructor(private notifierService:NotifierService, private restMatch:RestMatchService, route:ActivatedRoute) { 
+  matchSelected:Match;
+  indice;
+  team1:Team;
+  team2:Team;
+  constructor(private notifierService:NotifierService, private restMatch:RestMatchService, route:ActivatedRoute, private restTeam:RestTeamService, private restPlayer:RestPlayerService){ 
     this.notifier = notifierService;
     this.leagueId = route.snapshot.params.nombre;
     this.session = new Session('','',null,null,[],[]);
+    this.team1 = new Team('','','',null,null,null,null,null,null,null,null,[]);
+    this.team2 = new Team('','','',null,null,null,null,null,null,null,null,[]);
   }
 
+
+  restarGoles(player){
+    player.goal = player.goal-1;
+    this.contadorFinal=this.contadorFinal-1; 
+  }
+  
+  sumarGoles(player){
+    player.goal = player.goal+1;
+    this.contadorFinal=this.contadorFinal+1; 
+  }
+
+  restarGoles2(player){
+    player.goal = player.goal-1;
+    this.contadorFinal2=this.contadorFinal2-1; 
+  }
+  
+  sumarGoles2(player){
+    player.goal = player.goal+1;
+    this.contadorFinal2=this.contadorFinal2+1; 
+  }
   ngOnInit(): void {
     this.getMatches();
     this.getMatchesMatches();
   }
 
-  ngDoCheck(){
-    this.contadorFinal= this.contador1+ this.contador3;
-    this.contadorFinal2 = this.contador2+ this.contador4;
+  changeVerify(dato, match, indice){
+    this.contadorFinal = 0;
+    this.contadorFinal2 = 0;
+    this.verify2 = dato;
+    this.matchSelected = match;
+    this.indice = indice;
+    this.getTeam1(match.playersOne[0]);
+    this.getTeam2(match.playersSecond[0])
+    
   }
-
-  changeVerify(dato){
+  changeVerify2(dato){
     this.verify2 = dato;
   }
 
+  getTeam1(id){
+    this.restTeam.getTeam(id).subscribe((res:any)=>{
+      if(res.team){
+        this.team1 = res.team;
+        this.team1.players.map(function(dato:any){
+          dato.goal = 0;
+        });
+      }else{
+        this.notifier.notify("error", res.message)
+      }
+    }, error=>this.notifier.notify("error", error.error.message))
+  } 
+  getTeam2(id){
+    this.restTeam.getTeam(id).subscribe((res:any)=>{
+      if(res.team){
+        this.team2 = res.team;
+        this.team2.players.map(function(dato:any){
+          dato.goal = 0;
+        });
+      }else{
+        this.notifier.notify("error", res.message)
+      }
+    }, error=>this.notifier.notify("error", error.error.message))
+  } 
   createMatch(){
     this.removeMatch();
     
     this.restMatch.createMatch(this.leagueId, this.session).subscribe((res:any)=>{
-      console.log(res);
       if(res.date){
         this.notifier.notify("success",res.message);
+        this.getMatches();
+        this.getMatchesMatches();
       }else{
         this.notifier.notify("error",res.message);
       }
@@ -68,9 +124,7 @@ export class PartidosComponent implements OnInit, DoCheck {
   getMatches(){
     this.restMatch.getSession(this.leagueId).subscribe((res:any)=>{
       if(res.session){
-          this.sessions = res.session;
-          console.log(this.sessions);
-          
+          this.sessions = res.session;          
       }else{
         this.notifier.notify("error",res.message);
       }
@@ -81,10 +135,47 @@ export class PartidosComponent implements OnInit, DoCheck {
     this.restMatch.getMatches(this.leagueId).subscribe((res:any)=>{
       if(res.match){
           this.matches = res.match;
-          console.log(this.matches)
       }else{
         this.notifier.notify("error",res.message);
       }
     }, error=>this.notifier.notify("error", error.error.message)) 
+  }
+
+  saveMatch(){
+    this.restMatch.saveMatch(this.contadorFinal, this.contadorFinal2, this.matchSelected._id).subscribe((res:any)=>{
+      if(res.teamUpdate){
+        this.notifier.notify("success",res.message);
+        this.getMatches();
+        this.getMatchesMatches();
+        this.updatePlayer1();
+        this.updatePlayer2();
+        this.verify2 = 1;
+
+      }else{
+        this.notifier.notify("error",res.message);
+      }
+    },error=>this.notifier.notify("error", error.error.message))
+  }
+
+
+  updatePlayer1(){
+    for(let player of this.team1.players){
+      this.update(player);
+    }
+  }
+  updatePlayer2(){
+    for(let player of this.team2.players){
+      this.update(player);
+    }
+  }
+
+  update(player){
+    this.restPlayer.updatePlayerPoint(player).subscribe((res:any)=>{
+      if(res.playerUpdate){
+
+      }else{
+        this.notifier.notify("error",res.message);
+      }
+    },error=>this.notifier.notify("error", error.error.message))
   }
 }

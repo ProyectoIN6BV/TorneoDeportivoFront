@@ -120,4 +120,12 @@ export class ResUserService {
     .pipe(map(this.extractData));
   }
 
+  removeUser(id){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken()
+    })
+    return this.http.put(this.uri+'removeUser/'+id,{}, {headers:headers})
+    .pipe(map(this.extractData));
+  }
 }

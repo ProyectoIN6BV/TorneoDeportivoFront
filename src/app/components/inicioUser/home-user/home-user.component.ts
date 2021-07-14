@@ -24,7 +24,7 @@ export class HomeUserComponent implements OnInit {
   
   constructor(private route:Router, public loader: LoaderService, private restLeague: RestLeagueService, private restNotifier:NotifierService, private restUser:ResUserService){ 
     this.notifier = restNotifier;
-    this.league = new League('','','','',null,null,[],[])
+    this.league = new League('','','','','',null,null,[],[])
     this.user = restUser.getUser();
     this.token = restUser.getToken();
     this.uri = CONNECTION.URI;

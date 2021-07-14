@@ -1,5 +1,6 @@
 export class League{
     constructor(
+        public _id:String,
         public name: String,
         public season: String,
         public logo: String,

@@ -8,10 +8,10 @@
                 <img class="card-img-top" style="height: 9rem;" src="{{uri+'getImageTeam/'+team.logo}}" alt="Card image cap">
                 <div class="card-body">
                 <h5 class="card-title">{{team.name}}</h5>
-                <p class="card-text text-muted">partidos Jugados: 0</p>
-                <p class="card-text text-success">partidos ganados: 0</p>
-                <p class="card-text text-warning">partidos empatados: 0</p>
-                <p class="card-text text-danger">partidos perdidos: 0</p>
+                <p class="card-text text-muted">partidos Jugados: {{team.PJ}}</p>
+                <p class="card-text text-success">partidos ganados: {{team.PG}}</p>
+                <p class="card-text text-warning">partidos empatados: {{team.PE}}</p>
+                <p class="card-text text-danger">partidos perdidos:{{team.PP}}</p>
                 <button  class="btn btn-primary" (click)="changeVerify(2, team)">Ver Plantilla</button>
                 </div>
             </div>
@@ -31,7 +31,7 @@
         </div>
         <div *ngIf="verify==2" class="mt-2">
             <div class="row m-0" style="justify-content: flex-end;">
-                <button (click)="changeVerify(1)" class="btn btn-danger">X</button>
+                <button (click)="changeVerify2(1)" class="btn btn-danger">X</button>
             </div>
             <div class="w-100 text-center mt-1">
                 <h2 class="text-muted">PLANTILLA DE {{teamSelected.name}}</h2>

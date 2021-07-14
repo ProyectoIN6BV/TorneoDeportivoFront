@@ -90,5 +90,18 @@ export class RestMatchService {
     .pipe(map(this.extractData));
   }
 
+  saveMatch(golesFirst, golesSecond, matchId){
+    let params ={
+      "goalsFirst" : golesFirst,
+      "goalsSecond" : golesSecond 
+    }
+    let paramsFinal = JSON.stringify(params);
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.getToken()
+    })
 
+    return this.http.put(this.uri+"setPoint/"+matchId,paramsFinal,{headers:headers})
+    .pipe(map(this.extractData));
+  }
 }
